@@ -1,0 +1,132 @@
+````markdown
+# AI Investor Portal POC
+
+A **Proof-of-Concept Investor Portal** built with **FastAPI** (backend) and **React** (frontend), integrated with **Gemini AI** for interactive AI prompts. Users can **signup, login, submit AI prompts, and view AI responses** in a secure, responsive UI.
+
+---
+
+## Features
+
+- User registration and login with **JWT authentication**
+- Secure password hashing using **bcrypt**
+- Submit AI prompts via **Gemini AI API**
+- View AI responses rendered with **Markdown**
+- Responsive UI using **Bootstrap**
+- Persistent storage via **SQLite**
+- Modern card design with semi-transparent background
+
+---
+
+## Prerequisites
+
+- **Python 3.11+**  
+- **Node.js 18+** and **npm**  
+- **SQLite** (comes with Python)  
+- **Gemini AI API key**  
+
+---
+
+## Backend Setup (FastAPI)
+
+1. Clone the repository:
+
+```bash
+git clone <repo-url>
+cd <repo-folder>
+````
+
+2. Create a virtual environment:
+
+```bash
+python -m venv venv
+source venv/bin/activate  # Linux/Mac
+venv\Scripts\activate     # Windows
+```
+
+3. Install dependencies:
+
+```bash
+pip install fastapi uvicorn python-jose[cryptography] passlib[bcrypt] pydantic google-genai
+```
+
+4. Set the Gemini AI API key:
+
+```bash
+export GEMINI_API_KEY="YOUR_GEMINI_KEY"  # Linux/Mac
+set GEMINI_API_KEY=YOUR_GEMINI_KEY       # Windows
+```
+
+5. Run the FastAPI server:
+
+```bash
+uvicorn main:app --reload
+```
+
+* Backend runs at: `http://127.0.0.1:8000`
+* API docs: `http://127.0.0.1:8000/docs`
+
+---
+
+## Frontend Setup (React)
+
+1. Navigate to the frontend folder:
+
+```bash
+cd frontend
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+3. Run the React development server:
+
+```bash
+npm start
+```
+
+* Frontend runs at: `http://localhost:3000`
+
+---
+
+## Usage
+
+1. **Signup:** Create a new user account
+2. **Login:** Enter credentials to authenticate
+3. **Submit AI Prompt:** Type your prompt and click **Submit Prompt**
+4. **View AI Response:** AI response will render below the input area in Markdown
+
+---
+
+## Testing & Debugging
+
+* Duplicate email on signup → `Email already registered`
+* Wrong login credentials → `Login failed`
+* AI endpoint without a token → `401 Unauthorized`
+* AI responses must be **strings** for Markdown rendering
+
+---
+
+## Project Structure
+
+```
+root/
+├─ main.py                # FastAPI backend
+├─ investor_portal.db      # SQLite database (auto-created)
+├─ frontend/
+│  ├─ src/
+│  │  ├─ App.js           # Main React app
+│  │  ├─ assets/          # Images (logo, backgrounds)
+│  │  └─ index.js
+├─ README.md
+```
+
+---
+
+## Notes
+
+* Background images are applied with semi-transparent cards to show the backdrop
+* Ensure **CORS** is configured correctly (`http://localhost:3000`)
+* AI responses are extracted as plain text to avoid React Markdown rendering issues
